@@ -421,7 +421,7 @@ function startSync(){
     const d=snap.data();
     if(d._session===SESSION)return; // mi propio guardado
     const localTs=parseInt(localStorage.getItem('eco_ts')||'0');
-    if(d.ts&&d.ts<=localTs)return; // local es igual o más nuevo, no pisar
+    if(!d.ts||d.ts<=localTs)return; // si Firebase no tiene ts o es más viejo/igual, no pisar
     st.gastos=d.gastos||[];st.fijos=d.fijos||{};st.sueldoEst=d.sueldoEst||{};st.objetivos=d.objetivos||[];
     sl();setSync('online');render();
   },()=>setSync('local'));
@@ -787,7 +787,7 @@ window.vincular=()=>{
 ll();render();startSync();initCatDelegation();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('/Economia---Personal/sw.js');
 // version tag — visible in console
-console.log('%c Economía v9 ', 'background:#6c63ff;color:#fff;border-radius:4px;padding:2px 8px');
+console.log('%c Economía v10 ', 'background:#6c63ff;color:#fff;border-radius:4px;padding:2px 8px');
 </script>
 </body>
 </html>
