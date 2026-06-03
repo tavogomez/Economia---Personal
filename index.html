@@ -729,7 +729,7 @@ window.delG=id=>{if(!confirm('¿Eliminar?'))return;st.gastos=st.gastos.filter(g=
 
 // ── OBJETIVOS
 window.showAddGoal=()=>{document.getElementById('goal-nombre').value='';document.getElementById('goal-meta').value='';document.getElementById('goal-actual').value='';document.getElementById('ov-goal').classList.add('on');};
-window.saveGoal=()=>{const nombre=document.getElementById('goal-nombre').value.trim();const meta=parseFloat(document.getElementById('goal-meta').value)||0;const actual=parseFloat(document.getElementById('goal-actual').value)||0;if(!nombre){alert('Ingresá un nombre');return;}st.objetivos.push({id:uid(),nombre,meta,actual});save();renderObj();closeOv('ov-goal');};
+window.saveGoal=()=>{const nombre=document.getElementById('goal-nombre').value.trim();const meta=parseFloat(document.getElementById('goal-meta').value)||0;const actual=parseFloat(document.getElementById('goal-actual').value)||0;if(!nombre){alert('Ingresá un nombre');return;}closeOv('ov-goal');st.objetivos.push({id:uid(),nombre,meta,actual});save();render();};
 window.editGoal=id=>{const g=st.objetivos.find(o=>o.id===id);if(!g)return;const v=prompt(`¿Cuánto tenés ahorrado para "${g.nombre}"?`,g.actual||'');if(v===null)return;const n=parseFloat(v.replace(/\./g,'').replace(',','.'));if(!isNaN(n)&&n>=0){g.actual=n;save();renderObj();}};
 window.delGoal=id=>{if(!confirm('¿Eliminar esta meta?'))return;st.objetivos=st.objetivos.filter(o=>o.id!==id);save();renderObj();};
 window.editEmerg=()=>{const e=st.objetivos.find(o=>o.esEmerg);if(!e)return;const v=prompt('¿Cuánto tenés en el fondo de emergencia?',e.actual||'');if(v===null)return;const n=parseFloat(v.replace(/\./g,'').replace(',','.'));if(!isNaN(n)&&n>=0){e.actual=n;save();renderObj();}};
@@ -787,7 +787,7 @@ window.vincular=()=>{
 ll();render();startSync();initCatDelegation();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('/Economia---Personal/sw.js');
 // version tag — visible in console
-console.log('%c Economía v10 ', 'background:#6c63ff;color:#fff;border-radius:4px;padding:2px 8px');
+console.log('%c Economía v11 ', 'background:#6c63ff;color:#fff;border-radius:4px;padding:2px 8px');
 </script>
 </body>
 </html>
