@@ -417,13 +417,14 @@ function setSync(s){document.getElementById('sdot').className='sdot'+(s!=='onlin
 function save(){sl();saveCloud();}
 function startSync(){
   onSnapshot(doc(db,'economia',DEV),snap=>{
+    setSync('online'); // siempre online si Firebase responde
     if(!snap.exists()){saveCloud();return;}
     const d=snap.data();
     if(d._session===SESSION)return; // mi propio guardado
     const localTs=parseInt(localStorage.getItem('eco_ts')||'0');
     if(!d.ts||d.ts<=localTs)return; // si Firebase no tiene ts o es más viejo/igual, no pisar
     st.gastos=d.gastos||[];st.fijos=d.fijos||{};st.sueldoEst=d.sueldoEst||{};st.objetivos=d.objetivos||[];
-    sl();setSync('online');render();
+    sl();render();
   },()=>setSync('local'));
 }
 function saveCloud(){
@@ -787,7 +788,7 @@ window.vincular=()=>{
 ll();render();startSync();initCatDelegation();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('/Economia---Personal/sw.js');
 // version tag — visible in console
-console.log('%c Economía v11 ', 'background:#6c63ff;color:#fff;border-radius:4px;padding:2px 8px');
+console.log('%c Economía v12 ', 'background:#6c63ff;color:#fff;border-radius:4px;padding:2px 8px');
 </script>
 </body>
 </html>
