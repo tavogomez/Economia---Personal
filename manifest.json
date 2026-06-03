@@ -1,8 +1,8 @@
 {
-  "name": "Mi Planificador",
-  "short_name": "Planificador",
-  "description": "Planificador personal y control de gastos",
-  "start_url": "/",
+  "name": "Economía Personal",
+  "short_name": "Economía",
+  "description": "Control de gastos personales",
+  "start_url": "/Economia---Personal/",
   "display": "standalone",
   "background_color": "#f0f2f5",
   "theme_color": "#6c63ff",
